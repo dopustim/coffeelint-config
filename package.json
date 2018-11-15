@@ -1,0 +1,25 @@
+{
+    "name": "@dopustim/coffeelint-config",
+    "version": "0.1.0",
+    "description": "Configuration file for CoffeeLint",
+    "keywords": [
+        "configuration",
+        "config",
+        "json",
+        "validate",
+        "lint",
+        "linter",
+        "coffeelint"
+    ],
+    "author": "DopustimVladimir",
+    "license": "ISC",
+    "repository": "https://github.com/dopustim/coffeelint-config",
+    "main": "recommended.json",
+    "scripts": {
+        "test": "jasmine spec/index-spec.js"
+    },
+    "devDependencies": {
+        "coffeelint": "^2.1.0",
+        "jasmine": "^3.3.0"
+    }
+}
