@@ -1,25 +1,30 @@
 {
     "name": "@dopustim/coffeelint-config",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "Configuration file for CoffeeLint",
-    "keywords": [
-        "configuration",
-        "config",
-        "json",
-        "validate",
-        "lint",
-        "linter",
-        "coffeelint"
-    ],
+    "keywords": [ "dopustim", "coffeelint", "config", "validate", "lint", "linter" ],
     "author": "DopustimVladimir",
     "license": "ISC",
     "repository": "https://github.com/dopustim/coffeelint-config",
-    "main": "recommended.json",
+    "main": "index.js",
     "scripts": {
-        "test": "jasmine spec/index-spec.js"
+        "test": "jasmine spec/*-spec.js"
     },
     "devDependencies": {
-        "coffeelint": "^2.1.0",
-        "jasmine": "^3.3.0"
+        "jasmine": "^3.10.0",
+        "@coffeelint/cli": "^5.2.1",
+        "eslint": "^8.4.1"
+    },
+    "eslintConfig": {
+        "extends": "@dopustim/eslint-config",
+        "env": {
+            "jasmine": true,
+            "es2020": true,
+            "node": true
+        },
+        "parserOptions": {
+            "sourceType": "module",
+            "ecmaVersion": 2020
+        }
     }
 }

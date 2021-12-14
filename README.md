@@ -3,19 +3,13 @@
 
 Configuration file for CoffeeLint
 
-[![NPM](https://img.shields.io/npm/dt/@dopustim/coffeelint-config.svg?style=flat-square)](https://www.npmjs.com/package/@dopustim/coffeelint-config)
-
-[![GitHub tag](https://img.shields.io/github/tag/dopustim/coffeelint-config.svg?style=flat-square)](https://github.com/dopustim/coffeelint-config/tags)
-[![GitHub stars](https://img.shields.io/github/stars/dopustim/coffeelint-config.svg?style=flat-square)](https://github.com/dopustim/coffeelint-config/stargazers)
-[![GitHub issues](https://img.shields.io/github/issues/dopustim/coffeelint-config.svg?style=flat-square)](https://github.com/dopustim/coffeelint-config/issues)
-
-[![License](https://img.shields.io/badge/license-ISC-green.svg?style=flat-square)](/LICENSE.md)
+[![NPM](https://img.shields.io/npm/dt/@dopustim/coffeelint-config?style=flat-square)](https://www.npmjs.com/package/@dopustim/coffeelint-config)
 
 ## Features
 
 - Provide Errors and Warnings
 - 4 spaces for indentation (warning)
-- 100 symbols per line (warning)
+- 90 symbols per line (warning)
 - Unix linebreaks (warning)
 
 ## Usage
@@ -23,10 +17,10 @@ Configuration file for CoffeeLint
 Install `@dopustim/coffeelint-config` package via [NPM](https://www.npmjs.com/package/@dopustim/coffeelint-config):
 
 ```sh
-$ npm i -D coffeelint @dopustim/coffeelint-config
+npm install -D coffeelint @dopustim/coffeelint-config
 ```
 
-Extend this config in your `coffeelint.json`:
+Extend this config in your `.coffeelintrc.json`:
 
 ```json
 {
@@ -47,18 +41,10 @@ You can also reassign any rule for your needs:
 ```json
 {
     "extends": "@dopustim/coffeelint-config",
-    "rules": {
-        "space_operators": {
-            "level": "ignore"
-        }
-    }
+    "max_line_length": { "value": 100, "limitComments": true, "level": "warn" }
 }
 ```
 
-## Rules
+## About
 
-You can find all rules on [official site](http://www.coffeelint.org/#options).
-
-## License
-
-[ISC License](./LICENSE.md) © 2018 Dopustim Vladimir
+Visit the [CoffeeLint website](https://coffeelint.github.io) to find out all rules and descriptions.

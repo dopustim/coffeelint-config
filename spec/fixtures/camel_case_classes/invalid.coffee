@@ -1,6 +1,6 @@
 
 class duck
-    constructor: (name='Anonimous') ->
+    constructor: (name = 'Anonimous') ->
         @name = name
     quack: ->
         @name + ' Duck: Quack-quack!'

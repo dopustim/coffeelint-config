@@ -1,38 +1,71 @@
-const fs = require('fs');
-const coffeelint = require('coffeelint');
-const config = require('../');
+const coffeelint = require("coffeelint")
+const config = require("../")
+const fs = require("fs")
 
-const validSrc = fs.readFileSync('./spec/valid.coffee', 'utf8');
-const invalidSrc = fs.readFileSync('./spec/invalid.coffee', 'utf8');
+describe("With rule \"camel_case_classes\"", () => {
 
-describe('Lint result for valid CoffeeScript file', () => {
+    const validFile = "./spec/fixtures/camel_case_classes/valid.coffee"
+    const invalidFile = "./spec/fixtures/camel_case_classes/invalid.coffee"
 
-    let res;
+    let res
 
-    beforeAll(() => {
-        res = coffeelint.lint(validSrc, config);
-    });
-    it('has no errors', () => {
-        expect(res.length).toBeFalsy();
-    });
-});
+    describe("valid file", () => {
 
-describe('Lint result for invalid CoffeeScript file', () => {
+        beforeAll(() => {
+            const source = fs.readFileSync(validFile, "utf8")
+            res = coffeelint.lint(source, config)
+        })
+        it("has no errors or warnings", () => {
+            expect(res.length).toBeFalsy()
+        })
+    })
 
-    let res;
+    describe("invalid file", () => {
 
-    beforeAll(() => {
-        res = coffeelint.lint(invalidSrc, config);
-    });
-    it('has errors', () => {
-        expect(res.length).toBeTruthy();
-    });
-    it('has error for rule "camel_case_classes"', () => {
-        expect(res[0].rule).toBe('camel_case_classes');
-        expect(res[0].level).toBe('error');
-    });
-    it('has warning for rule "space_operators"', () => {
-        expect(res[1].rule).toBe('space_operators');
-        expect(res[1].level).toBe('warn');
-    });
-});
+        beforeAll(() => {
+            const source = fs.readFileSync(invalidFile, "utf8")
+            res = coffeelint.lint(source, config)
+        })
+        it("has errors or warnings", () => {
+            expect(res.length).toBeTruthy()
+        })
+        it("has error for rule \"camel_case_classes\"", () => {
+            expect(res[0].rule).toBe("camel_case_classes")
+            expect(res[0].level).toBe("error")
+        })
+    })
+})
+
+describe("With rule \"space_operators\"", () => {
+
+    const validFile = "./spec/fixtures/space_operators/valid.coffee"
+    const invalidFile = "./spec/fixtures/space_operators/invalid.coffee"
+
+    let res
+
+    describe("valid file", () => {
+
+        beforeAll(() => {
+            const source = fs.readFileSync(validFile, "utf8")
+            res = coffeelint.lint(source, config)
+        })
+        it("has no errors or warnings", () => {
+            expect(res.length).toBeFalsy()
+        })
+    })
+
+    describe("invalid file", () => {
+
+        beforeAll(() => {
+            const source = fs.readFileSync(invalidFile, "utf8")
+            res = coffeelint.lint(source, config)
+        })
+        it("has errors or warnings", () => {
+            expect(res.length).toBeTruthy()
+        })
+        it("has warn for rule \"space_operators\"", () => {
+            expect(res[0].rule).toBe("space_operators")
+            expect(res[0].level).toBe("warn")
+        })
+    })
+})
