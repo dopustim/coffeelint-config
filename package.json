@@ -11,9 +11,9 @@
         "test": "jasmine spec/*-spec.js"
     },
     "devDependencies": {
-        "jasmine": "^3.10.0",
-        "@coffeelint/cli": "^5.2.1",
-        "eslint": "^8.6.0"
+        "jasmine": "^4.0.2",
+        "@coffeelint/cli": "^5.2.3",
+        "eslint": "^8.7.0"
     },
     "eslintConfig": {
         "extends": "@dopustim/eslint-config",
