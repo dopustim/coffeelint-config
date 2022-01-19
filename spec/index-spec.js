@@ -1,71 +1,56 @@
-const coffeelint = require("coffeelint")
+const coffeelint = require("@coffeelint/cli")
 const config = require("../")
 const fs = require("fs")
 
-describe("With rule \"camel_case_classes\"", () => {
+for (const ruleName in config) {
 
-    const validFile = "./spec/fixtures/camel_case_classes/valid.coffee"
-    const invalidFile = "./spec/fixtures/camel_case_classes/invalid.coffee"
+    if (!fs.existsSync(`./spec/fixtures/${ruleName}`) ||
+        !fs.lstatSync(`./spec/fixtures/${ruleName}`).isDirectory())
+        continue
 
-    let res
+    describe(`With rule "${ruleName}"`, () => {
 
-    describe("valid file", () => {
+        const validFile = `./spec/fixtures/${ruleName}/valid.coffee`
+        const invalidFile = `./spec/fixtures/${ruleName}/invalid.coffee`
 
-        beforeAll(() => {
-            const source = fs.readFileSync(validFile, "utf8")
-            res = coffeelint.lint(source, config)
+        let res
+
+        describe("valid file", () => {
+
+            beforeAll(() => {
+                const source = fs.readFileSync(validFile, "utf8")
+                res = coffeelint.lint(source, config)
+            })
+            it("has no errors or warnings", () => {
+                expect(res.length).toBeFalsy()
+            })
         })
-        it("has no errors or warnings", () => {
-            expect(res.length).toBeFalsy()
-        })
-    })
 
-    describe("invalid file", () => {
+        describe("invalid file", () => {
 
-        beforeAll(() => {
-            const source = fs.readFileSync(invalidFile, "utf8")
-            res = coffeelint.lint(source, config)
-        })
-        it("has errors or warnings", () => {
-            expect(res.length).toBeTruthy()
-        })
-        it("has error for rule \"camel_case_classes\"", () => {
-            expect(res[0].rule).toBe("camel_case_classes")
-            expect(res[0].level).toBe("error")
-        })
-    })
-})
-
-describe("With rule \"space_operators\"", () => {
-
-    const validFile = "./spec/fixtures/space_operators/valid.coffee"
-    const invalidFile = "./spec/fixtures/space_operators/invalid.coffee"
-
-    let res
-
-    describe("valid file", () => {
-
-        beforeAll(() => {
-            const source = fs.readFileSync(validFile, "utf8")
-            res = coffeelint.lint(source, config)
-        })
-        it("has no errors or warnings", () => {
-            expect(res.length).toBeFalsy()
-        })
-    })
-
-    describe("invalid file", () => {
-
-        beforeAll(() => {
-            const source = fs.readFileSync(invalidFile, "utf8")
-            res = coffeelint.lint(source, config)
-        })
-        it("has errors or warnings", () => {
-            expect(res.length).toBeTruthy()
-        })
-        it("has warn for rule \"space_operators\"", () => {
-            expect(res[0].rule).toBe("space_operators")
-            expect(res[0].level).toBe("warn")
+            beforeAll(() => {
+                const source = fs.readFileSync(invalidFile, "utf8")
+                res = coffeelint.lint(source, config)
+            })
+            it("has errors or warnings", () => {
+                expect(res.length).toBeTruthy()
+            })
+            switch (config[ruleName].level) {
+                case "warn":
+                    // Warnings
+                    it(`has warning for rule "${ruleName}"`, () => {
+                        expect(res[0].rule).toBe(ruleName)
+                        expect(res[0].level).toBe("warn")
+                    })
+                    break
+                case "error":
+                    // Errors
+                    it(`has error for rule "${ruleName}"`, () => {
+                        expect(res[0].rule).toBe(ruleName)
+                        expect(res[0].level).toBe("error")
+                    })
+                    break
+            }
         })
     })
-})
+}
