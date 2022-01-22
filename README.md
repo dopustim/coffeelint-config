@@ -1,7 +1,7 @@
 
-# @dopustim/coffeelint-config
+# CoffeeLint Configuration
 
-Configuration file for CoffeeLint
+Configuration for CoffeeLint
 
 [![NPM](https://img.shields.io/npm/dt/@dopustim/coffeelint-config?style=flat-square)](https://www.npmjs.com/package/@dopustim/coffeelint-config)
 
@@ -14,10 +14,10 @@ Configuration file for CoffeeLint
 
 ## Usage
 
-Install `@dopustim/coffeelint-config` package via [NPM](https://www.npmjs.com/package/@dopustim/coffeelint-config):
+Install `@coffeelint/cli` and `@dopustim/coffeelint-config` packages via [NPM](https://www.npmjs.com):
 
 ```sh
-npm install -D coffeelint @dopustim/coffeelint-config
+npm install -D @coffeelint/cli @dopustim/coffeelint-config
 ```
 
 Extend this config in your `.coffeelintrc.json`:
